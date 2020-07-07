@@ -1,4 +1,4 @@
-public class Anime {
+public class Anime extends Animacao {
     private Temporada[] temporada;
     
 }
