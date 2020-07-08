@@ -11,6 +11,14 @@ public abstract class Animacao {
         setGenero(genero);
     }
 
+    public boolean buscarTitulo(String nome) { //da pra melhor essa busca 
+        if(getNome().equals(nome))
+            return true;
+        else
+            return false;
+
+    }
+
     //get e set
     public String getNome() {
         return nome;
