@@ -4,11 +4,13 @@ public class Temporada {
     private Data dataTermino;
     private Episodio[] episodios;
 
-    public Temporada(String estacao, Data dataInicio, Data dataTermino, Episodio[] episodios) {
+    private int nEpisodios = 0;
+
+    public Temporada(String estacao, Data dataInicio, Data dataTermino/* , Episodio[] episodios */) {
         setEstacao(estacao);
         setDataInicio(dataInicio);
         setDataTermino(dataTermino);
-        setEpisodios(episodios);
+        //setEpisodios(episodios);
     }
     //get e set
     public String getEstacao() {
@@ -39,8 +41,12 @@ public class Temporada {
         return episodios;
     }
 
-    public void setEpisodios(Episodio[] episodios) {
+    public void setEpisodios(Episodio[] episodios) {    
         this.episodios = episodios;
     }
 
+    public void adicionaEpisodio(Episodio episodio){    //chamada na main: Temporada[i].adicionaEpisodio(novoEpisodio)
+        this.episodios[nEpisodios] = episodio;
+        nEpisodios++;
+    }
 }
