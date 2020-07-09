@@ -1,9 +1,11 @@
 public class Anime extends Animacao {
     private Temporada[] temporada;
 
-    public Anime(String nome, String classificacaoIndicativa, String estudio, String[] genero, Temporada[] temporada) {
+    private int nTemporadas = 0;
+
+    public Anime(String nome, String classificacaoIndicativa, String estudio, String[] genero/*,  Temporada[] temporada */) {
         super(nome, classificacaoIndicativa, estudio, genero);
-        setTemporada(temporada);
+        //setTemporada(temporada);
     }
     //get e set
     public Temporada[] getTemporada() {
@@ -14,4 +16,9 @@ public class Anime extends Animacao {
         this.temporada = temporada;
     }
     
+    public void adicionaTemporada(Temporada temporada) { // chamada na main: Anime[i].adicionaTemporada(novaTemporada);
+        this.temporada[nTemporadas] = temporada;
+        nTemporadas++;
+    }
+
 }
