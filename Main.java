@@ -3,6 +3,8 @@ public class Main {
         
         Leitor leitor = new Leitor();
         int menu;
+        Animacao[] animacoes = new Animacao[10];
+        int quantAnimacao = 0;
         
         do {
             System.out.println("Escolha uma opção:");
@@ -14,7 +16,26 @@ public class Main {
         
             switch (menu) {
                 case 1:
-                    
+                    System.out.println("Digite o nome: ");
+                    String nome = leitor.leString();
+                    System.out.println("Digite qual eh a classificacao indicada: ");
+                    String classificacaoIndicativa = leitor.leString();
+                    System.out.println("Digite qual eh o estudio: ");
+                    String estudio = leitor.leString();
+                    System.out.println("Digite a quantidade de genero tem o filme: ");
+                    int quantGenero = leitor.leInteiro();
+                    String[] genero = new String[quantGenero];
+                    for(int i = 0; i < quantGenero; i++){
+                        System.out.println("Digite um genero:");
+                        genero[i] = leitor.leString();
+                    }
+                    System.out.println("Digite o ano que o filme foi criado: ");
+                    int ano = leitor.leInteiro();
+                    System.out.println("Digite a duracao do filme: ");
+                    String duracao = leitor.leString();
+
+                    animacoes[quantAnimacao] = new Filme(nome, classificacaoIndicativa, estudio, genero, ano, duracao);
+                    quantAnimacao++;
                     break;
             
                 case 2:
