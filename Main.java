@@ -1,6 +1,9 @@
 public class Main {
     public static void main(String[] args) {
-
+        ConexaoSQLite conexaoSQLite = new ConexaoSQLite();
+        conexaoSQLite.conectar();
+        // conexaoSQLite.desconectar();
+        
         JanelaComposicao janela = new JanelaComposicao("Cadastrar Animacoes");
         /*
         Leitor leitor = new Leitor();
