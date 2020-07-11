@@ -1,6 +1,8 @@
 public class Main {
     public static void main(String[] args) {
-        
+
+        JanelaComposicao janela = new JanelaComposicao("Cadastrar Animacoes");
+        /*
         Leitor leitor = new Leitor();
         int menu;
         Animacao[] animacoes = new Animacao[10];
@@ -46,16 +48,7 @@ public class Main {
                 default:
                     break;
             }
-        
-        
         } while (menu != 5);
-        
-
-
-
-
-
-
+        */
     }
-    
 }
