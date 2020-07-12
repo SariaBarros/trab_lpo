@@ -1,20 +1,14 @@
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import java.awt.event.ActionListener;
-import javax.swing.JMenu;
 import java.awt.BorderLayout;
 
 public class JanelaComposicao {
     private JFrame janela;
     private JMenuBar barraDeMenu;
-    
-    private JMenu menuAnime;
-    private JMenuItem menuAnimeCadastrar;
 
-    private JMenu menuFilme;
-    private JMenuItem menuFilmeCadastrar;
+    private BotaoMenu botaoAnime;
+    private BotaoMenu botaoFilme;
 
     private JLabel barraDeStatus;
 
@@ -23,29 +17,13 @@ public class JanelaComposicao {
         janela.setLayout(new BorderLayout());
 
         barraDeMenu = new JMenuBar();
-        menuAnime = new JMenu("Anime");
-        menuAnimeCadastrar = new JMenuItem("Cadastrar");
-        menuAnime.add(menuAnimeCadastrar);
 
-        menuFilme = new JMenu("Filme");
-        menuFilmeCadastrar = new JMenuItem("Cadastrar");
-        menuFilme.add(menuFilmeCadastrar);
+        configurarBotaoAnime();
 
-        barraDeMenu.add(menuAnime);
-        barraDeMenu.add(menuFilme);
+        configurarBotaoFilme();
 
-        //Tratando o evento de clicar em MenuFilme->Cadastrar
-        ActionListener ouvidoDoFilmeCadastrar = (informacoesDoEvento) -> {
-                barraDeStatus.setText("Cliquei em cadastrar Filme");
-        };
-
-        //Tratando o evento de clicar em MenuAnime->Cadastrar
-        ActionListener ouvidoDoAnimeCadastrar = (informacoesDoEvento) -> {
-                barraDeStatus.setText("Cliquei em cadastrar Anime");
-        };
-
-        menuFilmeCadastrar.addActionListener(ouvidoDoFilmeCadastrar); 
-        menuAnimeCadastrar.addActionListener(ouvidoDoAnimeCadastrar);
+        barraDeMenu.add(botaoAnime.getMenu());
+        barraDeMenu.add(botaoFilme.getMenu());
 
         barraDeStatus = new JLabel("Barra de Status");
 
@@ -54,5 +32,26 @@ public class JanelaComposicao {
         janela.setJMenuBar(barraDeMenu);
         janela.setSize(800, 600);
         janela.setVisible(true);
+    }
+
+    private void configurarBotaoAnime() {
+        botaoAnime = new BotaoMenu("Anime", 1);   
+        botaoAnime.adicionarMenuItem("Cadastrar");
+
+        botaoAnime.configurarEventoBotaoMenuItem(0, (informacoesDoEvento) -> {
+                barraDeStatus.setText("Cliquei em cadastrar Anime"); 
+            }
+        );
+    }
+
+    private void configurarBotaoFilme() {
+        botaoFilme = new BotaoMenu("Filme", 1);   
+        botaoFilme.adicionarMenuItem("Cadastrar");
+
+        botaoFilme.configurarEventoBotaoMenuItem(0, (informacoesDoEvento) -> {
+                barraDeStatus.setText("Cliquei em cadastrar Filme");
+                
+            }
+        );
     }
 }
