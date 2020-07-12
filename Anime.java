@@ -3,7 +3,7 @@ public class Anime extends Animacao {
 
     private int nTemporadas = 0;
 
-    public Anime(String nome, String classificacaoIndicativa, String estudio, String[] genero/*,  Temporada[] temporada */) {
+    public Anime(String nome, String classificacaoIndicativa, String estudio, String genero/*,  Temporada[] temporada */) {
         super(nome, classificacaoIndicativa, estudio, genero);
         //setTemporada(temporada);
     }
