@@ -2,7 +2,7 @@ public class Filme extends Animacao {
     private int ano;
     private String duracao;
 
-    public Filme(String nome, String classificacaoIndicativa, String estudio, String[] genero, int ano,
+    public Filme(String nome, String classificacaoIndicativa, String estudio, String genero, int ano,
             String duracao) {
         super(nome, classificacaoIndicativa, estudio, genero);
         setAno(ano);
