@@ -2,24 +2,16 @@ public abstract class Animacao {
     private String nome;
     private String classificacaoIndicativa;
     private String estudio;
-    private String[] genero;
+    private String genero;
 
-    public Animacao(String nome, String classificacaoIndicativa, String estudio, String[] genero) {
+    public Animacao(String nome, String classificacaoIndicativa, String estudio, String genero) {
         setNome(nome);
         setClassificacaoIndicativa(classificacaoIndicativa);
         setEstudio(estudio);
         setGenero(genero);
     }
 
-    public boolean buscarTitulo(String nome) { //da pra melhor essa busca 
-        if(getNome().equals(nome))
-            return true;
-        else
-            return false;
-
-    }
-
-    //get e set
+    //getters e setters
     public String getNome() {
         return nome;
     }
@@ -44,11 +36,11 @@ public abstract class Animacao {
         this.estudio = estudio;
     }
 
-    public String[] getGenero() {
+    public String getGenero() {
         return genero;
     }
 
-    public void setGenero(String[] genero) {
+    public void setGenero(String genero) {
         this.genero = genero;
     }
 }
