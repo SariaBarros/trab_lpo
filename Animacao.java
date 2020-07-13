@@ -6,6 +6,7 @@ public abstract class Animacao {
     private String genero;
 
     public Animacao(int id, String nome, String classificacaoIndicativa, String estudio, String genero) {
+        setId(id);
         setNome(nome);
         setClassificacaoIndicativa(classificacaoIndicativa);
         setEstudio(estudio);
