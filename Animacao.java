@@ -1,4 +1,5 @@
 public abstract class Animacao {
+    private int id;
     private String nome;
     private String classificacaoIndicativa;
     private String estudio;
@@ -10,8 +11,16 @@ public abstract class Animacao {
         setEstudio(estudio);
         setGenero(genero);
     }
-
+    
     //getters e setters
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
     public String getNome() {
         return nome;
     }
@@ -43,4 +52,5 @@ public abstract class Animacao {
     public void setGenero(String genero) {
         this.genero = genero;
     }
+    
 }
