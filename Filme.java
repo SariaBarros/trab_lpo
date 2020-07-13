@@ -1,14 +1,16 @@
 public class Filme extends Animacao { 
+    
     private int ano;
     private String duracao;
 
-    public Filme(String nome, String classificacaoIndicativa, String estudio, String genero, int ano,
+    public Filme(int id, String nome, String classificacaoIndicativa, String estudio, String genero, int ano,
             String duracao) {
-        super(nome, classificacaoIndicativa, estudio, genero);
+        super(id, nome, classificacaoIndicativa, estudio, genero);
         setAno(ano);
         setDuracao(duracao);
     }
-    //getters e setters
+    
+    //getters e setters    
     public int getAno() {
         return ano;
     }
@@ -31,6 +33,5 @@ public class Filme extends Animacao {
         return "id: " + getId() + "      Filme: " + getNome() + "\nClassificaçao indicativa: "
                 + getClassificacaoIndicativa() + "\nEstudio: " + getEstudio() + "\nGenero: " + getGenero()
                 + "\nAno de lançamento: " + getAno() + "\nDuraçao: " + getDuracao() + "\n";
-    }
-    
+    } 
 }
