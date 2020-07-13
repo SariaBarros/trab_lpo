@@ -8,7 +8,7 @@ public class Filme extends Animacao {
         setAno(ano);
         setDuracao(duracao);
     }
-    //get e set
+    //getters e setters
     public int getAno() {
         return ano;
     }
@@ -26,6 +26,11 @@ public class Filme extends Animacao {
         this.duracao = duracao;
     }
 
-    
+    @Override
+    public String toString() {
+        return "id: " + getId() + "      Filme: " + getNome() + "\nClassificaçao indicativa: "
+                + getClassificacaoIndicativa() + "\nEstudio: " + getEstudio() + "\nGenero: " + getGenero()
+                + "\nAno de lançamento: " + getAno() + "\nDuraçao: " + getDuracao() + "\n";
+    }
     
 }
