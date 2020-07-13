@@ -14,7 +14,7 @@ public class ConexaoSQLite {
         } catch (ClassNotFoundException | SQLException e) {
             throw new RuntimeException("Erro na conexao: ", e);
         }
-        // System.out.println("conectou!!!");
+        
     }
 
     // sobrecarga nos metodos de desconexao - usados de acordo com o q precisa ser
@@ -28,7 +28,7 @@ public class ConexaoSQLite {
         } catch (SQLException e) {
             throw new RuntimeException("Erro na desconexao: ", e);
         }
-        // System.out.println("desconectou!!!");
+        
     }
 
     public static void desconectar(Connection con, PreparedStatement stmt) {
@@ -41,7 +41,7 @@ public class ConexaoSQLite {
         } catch (SQLException e) {
             throw new RuntimeException("Erro na desconexao: ", e);
         }
-        // System.out.println("desconectou!!!");
+        
     }
 
     public static void desconectar(Connection con, PreparedStatement stmt, ResultSet rs) {
