@@ -1,52 +1,66 @@
+
 public class Temporada {
+
+    private int id;
     private String estacao;
-    private Data dataInicio;
-    private Data dataTermino;
-    private Episodio[] episodios;
+    private String dataInicio;
+    private String dataTermino;
 
-    private int nEpisodios = 0;
+    private Anime fkAnime; // **funcionará como FK - inserida em TemporadaDAO.create() por composição
 
-    public Temporada(String estacao, Data dataInicio, Data dataTermino/* , Episodio[] episodios */) {
+    public Temporada(int id, final String estacao, String dataInicio, String dataTermino, Anime fkAnime) {
+        setId(id);
         setEstacao(estacao);
         setDataInicio(dataInicio);
         setDataTermino(dataTermino);
-        //setEpisodios(episodios);
+        setFkanime(fkAnime);
     }
-    //get e set
+
+    // getters e setters
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getDataInicio() {
+        return dataInicio;
+    }
+
+    public void setDataInicio(String dataInicio) {
+        this.dataInicio = dataInicio;
+    }
+
+    public String getDataTermino() {
+        return dataTermino;
+    }
+
+    public void setDataTermino(String dataTermino) {
+        this.dataTermino = dataTermino;
+    }
+
     public String getEstacao() {
         return estacao;
     }
 
-    public void setEstacao(String estacao) {
+    public void setEstacao(final String estacao) {
         this.estacao = estacao;
     }
 
-    public Data getDataInicio() {
-        return dataInicio;
+    public Anime getFkanime() {
+        return fkAnime;
     }
 
-    public void setDataInicio(Data dataInicio) {
-        this.dataInicio = dataInicio;
+    public void setFkanime(Anime fkAnime) {
+        this.fkAnime = fkAnime;
     }
 
-    public Data getDataTermino() {
-        return dataTermino;
+    @Override
+    public String toString() {
+        return "Temporada [" + getId() + "]\nEstaçao: " + getEstacao() + "\nData de início: " + getDataInicio()
+                + "\nData de término: " + getDataTermino();
     }
 
-    public void setDataTermino(Data dataTermino) {
-        this.dataTermino = dataTermino;
-    }
-
-    public Episodio[] getEpisodios() {
-        return episodios;
-    }
-
-    public void setEpisodios(Episodio[] episodios) {    
-        this.episodios = episodios;
-    }
-
-    public void adicionaEpisodio(Episodio episodio){    //chamada na main: Temporada[i].adicionaEpisodio(novoEpisodio)
-        this.episodios[nEpisodios] = episodio;
-        nEpisodios++;
-    }
 }
