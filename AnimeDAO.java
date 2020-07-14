@@ -66,10 +66,10 @@ public class AnimeDAO {
                         System.out.println(t.toString());
 
                         // imprimindo os episódios
-                        /*
-                         * EpisodioDAO episodioDao = new EpisodioDAO(); for (Episodio e :
-                         * episodioDao.readEpisodio(t)) { System.out.println(e.toString()); }
-                         */
+                        EpisodioDAO episodioDao = new EpisodioDAO();
+                        for (Episodio e : episodioDao.readEpisodio(t, a)) {
+                            System.out.println(e.toString());
+                        }
 
                     }
 
@@ -85,5 +85,6 @@ public class AnimeDAO {
         // array passado para ser listado no codigo da interface gráfica
         // return animes;
     }
+
     // outros metodos: update(), delete()
 }
