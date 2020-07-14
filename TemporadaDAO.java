@@ -48,7 +48,7 @@ public class TemporadaDAO {
 
         try {
             // consulta INNER JOIN: retorna a linha da tabela temporada que possui a
-            // fk.temporada == id.anime
+            // fk.temporada == id.temporada AND fk.anime == id.anime
             stmt = con.prepareStatement(
                     "SELECT * FROM temporada INNER JOIN anime ON temporada.fk_anime_id = anime.pk_id_anime");
             rs = stmt.executeQuery();
@@ -59,7 +59,7 @@ public class TemporadaDAO {
                 String dataInicio = rs.getString("dataInicio");
                 String dataTermino = rs.getString("dataTermino");
 
-                Temporada novaTemp = new Temporada(idTemp, dataInicio, dataTermino, estacao, anime);
+                Temporada novaTemp = new Temporada(idTemp, estacao, dataInicio, dataTermino, anime);
                 temporadas.add(novaTemp); // add ao array q será retornado para read() de AnimeDAO
             }
 
