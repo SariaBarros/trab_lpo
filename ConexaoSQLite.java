@@ -9,7 +9,7 @@ public class ConexaoSQLite {
         try {
 
             Class.forName("org.sqlite.JDBC");
-            return DriverManager.getConnection("jdbc:sqlite:test.db");
+            return DriverManager.getConnection("jdbc:sqlite:animacao.db");
 
         } catch (ClassNotFoundException | SQLException e) {
             throw new RuntimeException("Erro na conexao: ", e);
