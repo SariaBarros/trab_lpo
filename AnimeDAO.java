@@ -54,28 +54,27 @@ public class AnimeDAO {
 
                 Anime novoAnime = new Anime(idAnime, nome, classificacao, estudio, genero);
                 animes.add(novoAnime); // add ao array de animes q será percorrido no primeiro laço
+            }
 
-                // imprimindo a tabela de animes
-                for (Anime a : animes) {
-                    System.out.println(a.toString());
+            // imprimindo a tabela de animes
+            for (Anime a : animes) {
+                System.out.println(a.toString());
 
-                    // imprimindo as temporadas
-                    TemporadaDAO tempDao = new TemporadaDAO();
-                    for (Temporada t : tempDao.readTemporada(a)) { // percorre a lista retornada pelo
-                                                                   // tempDAO.readTemporada(a)
+                // imprimindo as temporadas
+                TemporadaDAO tempDao = new TemporadaDAO();
+                for (Temporada t : tempDao.readTemporada(a)) {      // percorre a lista retornada pelo tempDAO.readTemporada(a)
                         System.out.println(t.toString());
 
-                        // imprimindo os episódios
-                        EpisodioDAO episodioDao = new EpisodioDAO();
-                        for (Episodio e : episodioDao.readEpisodio(t, a)) {
-                            System.out.println(e.toString());
-                        }
-
+                    // imprimindo os episódios
+                    EpisodioDAO episodioDao = new EpisodioDAO();
+                    for (Episodio e : episodioDao.readEpisodio(t, a)) {     // percorre a lista retornada pelo epidodioDao.readEpisodio(t,a)
+                        System.out.println(e.toString());
                     }
-
+                
                 }
 
             }
+
 
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Erro ao salvar! " + e.getMessage());
