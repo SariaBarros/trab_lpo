@@ -8,6 +8,8 @@ public class JanelaComposicao {
     private JMenuBar barraDeMenu;
 
     private BotaoMenu botaoAnime;
+    private BotaoMenu botaoTemporada;
+    private BotaoMenu botaoEpsodio;
     private BotaoMenu botaoFilme;
 
     private JLabel barraDeStatus;
@@ -19,10 +21,13 @@ public class JanelaComposicao {
         barraDeMenu = new JMenuBar();
 
         configurarBotaoAnime();
-
+        configurarBotaoTemporada();
+        configurarBotaoEpsodio();
         configurarBotaoFilme();
 
         barraDeMenu.add(botaoAnime.getMenu());
+        barraDeMenu.add(botaoTemporada.getMenu());
+        barraDeMenu.add(botaoEpsodio.getMenu());
         barraDeMenu.add(botaoFilme.getMenu());
 
         barraDeStatus = new JLabel("Barra de Status");
@@ -94,6 +99,70 @@ public class JanelaComposicao {
         botaoAnime.configurarEventoBotaoMenuItem(3, (informacoesDoEvento) -> {
             barraDeStatus.setText("Cliquei em deletar Anime");
             // codigo de deletar anime
+
+        });
+    }
+
+    private void configurarBotaoTemporada() {
+        botaoTemporada = new BotaoMenu("Temporada", 4);
+        botaoTemporada.adicionarMenuItem("Cadastrar");
+        botaoTemporada.adicionarMenuItem("Listar");
+        botaoTemporada.adicionarMenuItem("Atualizar");
+        botaoTemporada.adicionarMenuItem("Deletar");
+
+        botaoTemporada.configurarEventoBotaoMenuItem(0, (informacoesDoEvento) -> {
+            barraDeStatus.setText("Cliquei em cadastrar Temporada");
+            // codigo de cadastrar Temporada
+
+        });
+
+        botaoTemporada.configurarEventoBotaoMenuItem(1, (informacoesDoEvento) -> {
+            barraDeStatus.setText("Cliquei em listar Temporada");
+            // codigo de listar temporada
+
+        });
+
+        botaoTemporada.configurarEventoBotaoMenuItem(2, (informacoesDoEvento) -> {
+            barraDeStatus.setText("Cliquei em atualizar Temporada");
+            // codigo de atualizar temporada
+
+        });
+
+        botaoTemporada.configurarEventoBotaoMenuItem(3, (informacoesDoEvento) -> {
+            barraDeStatus.setText("Cliquei em deletar Temporada");
+            // codigo de deletar temporada
+
+        });
+    }
+
+    private void configurarBotaoEpsodio() {
+        botaoEpsodio = new BotaoMenu("Epsodio", 4);
+        botaoEpsodio.adicionarMenuItem("Cadastrar");
+        botaoEpsodio.adicionarMenuItem("Listar");
+        botaoEpsodio.adicionarMenuItem("Atualizar");
+        botaoEpsodio.adicionarMenuItem("Deletar");
+
+        botaoEpsodio.configurarEventoBotaoMenuItem(0, (informacoesDoEvento) -> {
+            barraDeStatus.setText("Cliquei em cadastrar Epsodio");
+            // codigo de cadastrar epsodio
+
+        });
+
+        botaoEpsodio.configurarEventoBotaoMenuItem(1, (informacoesDoEvento) -> {
+            barraDeStatus.setText("Cliquei em listar Epsodio");
+            // codigo de listar espsodio
+
+        });
+
+        botaoEpsodio.configurarEventoBotaoMenuItem(2, (informacoesDoEvento) -> {
+            barraDeStatus.setText("Cliquei em atualizar Epsodio");
+            // codigo de atualizar epsodio
+
+        });
+
+        botaoEpsodio.configurarEventoBotaoMenuItem(3, (informacoesDoEvento) -> {
+            barraDeStatus.setText("Cliquei em deletar Epsodio");
+            // codigo de deletar epsodio
 
         });
     }
