@@ -2,6 +2,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenuBar;
 import java.awt.BorderLayout;
+import javax.swing.JOptionPane;
 
 public class JanelaComposicao {
     private JFrame janela;
@@ -9,7 +10,7 @@ public class JanelaComposicao {
 
     private BotaoMenu botaoAnime;
     private BotaoMenu botaoTemporada;
-    private BotaoMenu botaoEpsodio;
+    private BotaoMenu botaoEpisodio;
     private BotaoMenu botaoFilme;
 
     private JLabel barraDeStatus;
@@ -22,12 +23,12 @@ public class JanelaComposicao {
 
         configurarBotaoAnime();
         configurarBotaoTemporada();
-        configurarBotaoEpsodio();
+        configurarBotaoEpisodio();
         configurarBotaoFilme();
 
         barraDeMenu.add(botaoAnime.getMenu());
         barraDeMenu.add(botaoTemporada.getMenu());
-        barraDeMenu.add(botaoEpsodio.getMenu());
+        barraDeMenu.add(botaoEpisodio.getMenu());
         barraDeMenu.add(botaoFilme.getMenu());
 
         barraDeStatus = new JLabel("Barra de Status");
@@ -58,28 +59,7 @@ public class JanelaComposicao {
             AnimeDAO aDao = new AnimeDAO();
             aDao.create(anime);
 
-            int r = Leitor2.leInteiroDoTeclado("Inserir nova Temporada?\n[1] Sim\n[2] Nao");
-            while (r != 2) {
-
-                int idTemp = Leitor2.leInteiroDoTeclado("Informe o id da temporada");
-                String estacao = Leitor2.leStringDoTeclado("Informe a estaçao da temporada:");
-                String dataInicio = Leitor2.leStringDoTeclado("Informe a data de estreia da temporada (dd/mm/aaaa):");
-                String dataTermino = Leitor2.leStringDoTeclado("Informe a data de término da temporada (dd/mm/aaaa):");
-
-                Temporada temporada = new Temporada(idTemp, estacao, dataInicio, dataTermino, anime);
-                TemporadaDAO tempDao = new TemporadaDAO();
-                tempDao.create(temporada);
-                r = Leitor2.leInteiroDoTeclado("Inserir nova Temporada?\n[1] Sim\n[2] Nao");
-
-            }
-
-            // int r1 = Leitor2.leInteiroDoTeclado("Inserir novos episódios à
-            // Temporada?\n[1] Sim\n[2] Nao");
-            // if (r1 == 1) {
-
-            // }else
-            // return;
-
+            JOptionPane.showMessageDialog(null, "Para adicionar temporadas clique em Temporada > Cadastrar");
         });
 
         botaoAnime.configurarEventoBotaoMenuItem(1, (informacoesDoEvento) -> {
@@ -112,8 +92,20 @@ public class JanelaComposicao {
 
         botaoTemporada.configurarEventoBotaoMenuItem(0, (informacoesDoEvento) -> {
             barraDeStatus.setText("Cliquei em cadastrar Temporada");
-            // codigo de cadastrar Temporada
 
+            // codigo de cadastrar Temporada
+            int idTemp = Leitor2.leInteiroDoTeclado("Informe o id da temporada");
+            String estacao = Leitor2.leStringDoTeclado("Informe a estaçao da temporada:");
+            String dataInicio = Leitor2.leStringDoTeclado("Informe a data de estreia da temporada (dd/mm/aaaa):");
+            String dataTermino = Leitor2.leStringDoTeclado("Informe a data de término da temporada (dd/mm/aaaa):");
+            int fktemp = Leitor2.leInteiroDoTeclado("Informe o id do Anime ao qual a temporada pertence:");
+
+            Anime anime = new Anime(fktemp, null, null, null, null);
+            Temporada temporada = new Temporada(idTemp, estacao, dataInicio, dataTermino, anime);
+            TemporadaDAO tempDao = new TemporadaDAO();
+            tempDao.create(temporada);
+
+            JOptionPane.showMessageDialog(null, "Para adicionar episódios clique em Episodio > Cadastrar");
         });
 
         botaoTemporada.configurarEventoBotaoMenuItem(1, (informacoesDoEvento) -> {
@@ -135,34 +127,47 @@ public class JanelaComposicao {
         });
     }
 
-    private void configurarBotaoEpsodio() {
-        botaoEpsodio = new BotaoMenu("Epsodio", 4);
-        botaoEpsodio.adicionarMenuItem("Cadastrar");
-        botaoEpsodio.adicionarMenuItem("Listar");
-        botaoEpsodio.adicionarMenuItem("Atualizar");
-        botaoEpsodio.adicionarMenuItem("Deletar");
+    private void configurarBotaoEpisodio() {
+        botaoEpisodio = new BotaoMenu("Episodio", 4);
+        botaoEpisodio.adicionarMenuItem("Cadastrar");
+        botaoEpisodio.adicionarMenuItem("Listar");
+        botaoEpisodio.adicionarMenuItem("Atualizar");
+        botaoEpisodio.adicionarMenuItem("Deletar");
 
-        botaoEpsodio.configurarEventoBotaoMenuItem(0, (informacoesDoEvento) -> {
-            barraDeStatus.setText("Cliquei em cadastrar Epsodio");
-            // codigo de cadastrar epsodio
+        botaoEpisodio.configurarEventoBotaoMenuItem(0, (informacoesDoEvento) -> {
+            barraDeStatus.setText("Cliquei em cadastrar Episodio");
+
+            // codigo de cadastrar Episodio
+            int idEp = Leitor2.leInteiroDoTeclado("Informe o id do episódio:");
+            String titulo = Leitor2.leStringDoTeclado("Informe o título do episódio:");
+            String duracao = Leitor2.leStringDoTeclado("Informe a duraçao do episodio");
+            int fkepTemp = Leitor2.leInteiroDoTeclado("Informe o id do temporada à qual o episodio pertence:");
+            int fkepAnime = Leitor2.leInteiroDoTeclado("Informe o id do anime ao qual o episodio pertence:");
+
+            Anime anime = new Anime(fkepAnime, null, null, null, null); // definindo a fk da tab anime
+            Temporada temp = new Temporada(fkepTemp, null, null, null, null); // definindo a fk da tab temporada
+            // criçao do ep
+            Episodio episodio = new Episodio(idEp, titulo, duracao, temp, anime);
+            EpisodioDAO epDao = new EpisodioDAO();
+            epDao.create(episodio);
 
         });
 
-        botaoEpsodio.configurarEventoBotaoMenuItem(1, (informacoesDoEvento) -> {
-            barraDeStatus.setText("Cliquei em listar Epsodio");
-            // codigo de listar espsodio
+        botaoEpisodio.configurarEventoBotaoMenuItem(1, (informacoesDoEvento) -> {
+            barraDeStatus.setText("Cliquei em listar Episodio");
+            // codigo de listar Episodio
 
         });
 
-        botaoEpsodio.configurarEventoBotaoMenuItem(2, (informacoesDoEvento) -> {
-            barraDeStatus.setText("Cliquei em atualizar Epsodio");
-            // codigo de atualizar epsodio
+        botaoEpisodio.configurarEventoBotaoMenuItem(2, (informacoesDoEvento) -> {
+            barraDeStatus.setText("Cliquei em atualizar Episodio");
+            // codigo de atualizar Episodio
 
         });
 
-        botaoEpsodio.configurarEventoBotaoMenuItem(3, (informacoesDoEvento) -> {
-            barraDeStatus.setText("Cliquei em deletar Epsodio");
-            // codigo de deletar epsodio
+        botaoEpisodio.configurarEventoBotaoMenuItem(3, (informacoesDoEvento) -> {
+            barraDeStatus.setText("Cliquei em deletar Episodio");
+            // codigo de deletar Episodio
 
         });
     }
