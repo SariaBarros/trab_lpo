@@ -113,4 +113,26 @@ public class AnimeDAO {
         }
 
     }
+
+    //delete:
+
+    public void DELETE(Anime a) {
+
+        PreparedStatement stmt = null;
+
+        try {
+            stmt = con.prepareStatement(
+                    "DELETE FROM anime WHERE id = ?");
+            stmt.setInt(1, a.getId());
+
+            stmt.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Excluído com sucesso!");
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro ao excluir!" + e);
+        } finally {
+            ConexaoSQLite.desconectar(con, stmt);
+        }
+
+    }
 }

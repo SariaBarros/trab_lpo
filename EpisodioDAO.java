@@ -101,4 +101,26 @@ public class EpisodioDAO {
 
     }
 
+    //delete:
+    
+    public void DELETE(Episodio ep) {
+
+        PreparedStatement stmt = null;
+
+        try {
+            
+            stmt = con.prepareStatement(
+                    "DELETE FROM episodio WHERE id = ?");
+            stmt.setInt(1, ep.getId());          
+
+            stmt.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Excluído com sucesso!");
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro ao excluir! " + e.getMessage());
+        } finally {
+            ConexaoSQLite.desconectar(con, stmt);
+        }
+
+    }
 }

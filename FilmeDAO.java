@@ -101,5 +101,24 @@ public class FilmeDAO {
         }
     }
 
+    //delete: 
+    public void DELETE(Filme f) { 
+
+        PreparedStatement stmt = null;
+
+        try {
+            stmt = con.prepareStatement(
+                    "DELETE FROM filme WHERE id = ?");
+            stmt.setInt(1, f.getId()); //identificador do WHERE pra saber qual o filme a ser atualizado
+
+            stmt.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Excluído com sucesso!");
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro ao excluir! " + e.getMessage());
+        } finally {
+            ConexaoSQLite.desconectar(con, stmt);
+        }
+    }
 
 }
