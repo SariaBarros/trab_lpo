@@ -74,4 +74,32 @@ public class FilmeDAO {
 
     // outros metodos: update(), delete()
 
+    //update
+    public void update(Filme f) { // inserção de dados nas tabelas do bd
+
+        PreparedStatement stmt = null;
+
+        try {
+            stmt = con.prepareStatement(
+                    "UPDATE filme SET pk_id_filme = ?, nome_filme = ?, classificacaoIndicativa = ?, estudio = ?, genero = ?, ano = ?, duracao = ? WHERE id = ?");
+            stmt.setInt(1, f.getId());
+            stmt.setString(2, f.getNome());
+            stmt.setString(3, f.getClassificacaoIndicativa());
+            stmt.setString(4, f.getEstudio());
+            stmt.setString(5, f.getGenero());
+            stmt.setInt(6, f.getAno());
+            stmt.setString(7, f.getDuracao());
+            stmt.setInt(8, f.getId()); //identificador do WHERE pra saber qual o filme a ser atualizado
+
+            stmt.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Atualizado com sucesso!");
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro ao atualizar! " + e.getMessage());
+        } finally {
+            ConexaoSQLite.desconectar(con, stmt);
+        }
+    }
+
+
 }
