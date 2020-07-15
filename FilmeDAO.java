@@ -75,7 +75,7 @@ public class FilmeDAO {
     // outros metodos: update(), delete()
 
     //update
-    public void update(Filme f) { // inserção de dados nas tabelas do bd
+    public void update(Filme f) { 
 
         PreparedStatement stmt = null;
 

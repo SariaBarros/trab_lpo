@@ -73,4 +73,32 @@ public class EpisodioDAO {
     }
     // outros metodos: update(), delete()
 
+    //update:
+    public void UPDATE(Episodio ep) {
+
+        PreparedStatement stmt = null;
+
+        try {
+            
+            stmt = con.prepareStatement(
+                    "UPDATE episodio SET pk_id_ep = ?, titulo_ep = ?, duracao_ep = ?, fk_temporada_id = ?, fk_anime_id = ? WHERE id = ?");
+            // a seguir, captura de dados do objeto para o statement
+            stmt.setInt(1, ep.getId());
+            stmt.setString(2, ep.getTitulo());
+            stmt.setString(3, ep.getDuracao());
+            stmt.setInt(4, ep.getFktemp().getId());    
+            stmt.setInt(5, ep.getFkAnime().getId());
+            stmt.setInt(6, ep.getId());          
+
+            stmt.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Atualizado com sucesso!");
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro ao atualizar! " + e.getMessage());
+        } finally {
+            ConexaoSQLite.desconectar(con, stmt);
+        }
+
+    }
+
 }

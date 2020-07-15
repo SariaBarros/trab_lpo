@@ -86,4 +86,31 @@ public class AnimeDAO {
     }
 
     // outros metodos: update(), delete()
+
+    //update
+    public void UPDATE(Anime a) {
+
+        PreparedStatement stmt = null;
+
+        try {
+            // formação de statements para executar sql
+            stmt = con.prepareStatement(
+                    "UPDATE anime SET pk_id_anime = ?, nome_anime = ?, classificacaoIndicativa_anime = ?, estudio_anime = ?, genero_anime = ? WHERE id = ?");
+            stmt.setInt(1, a.getId());
+            stmt.setString(2, a.getNome());
+            stmt.setString(3, a.getClassificacaoIndicativa());
+            stmt.setString(4, a.getEstudio());
+            stmt.setString(5, a.getGenero());
+            stmt.setInt(6, a.getId());
+
+            stmt.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Atualizado com sucesso!");
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro ao Atualizar!" + e);
+        } finally {
+            ConexaoSQLite.desconectar(con, stmt);
+        }
+
+    }
 }
