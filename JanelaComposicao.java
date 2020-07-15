@@ -3,6 +3,8 @@ import javax.swing.JLabel;
 import javax.swing.JMenuBar;
 import java.awt.BorderLayout;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import java.awt.GridLayout;
 
 public class JanelaComposicao {
     private JFrame janela;
@@ -66,6 +68,7 @@ public class JanelaComposicao {
             barraDeStatus.setText("Cliquei em listar Anime");
             // codigo de listar o anime [todos]
             AnimeDAO animeDAO = new AnimeDAO();
+            //JPanel painel = new JPanel(new GridLayout(100, 1));
             animeDAO.readAnime();
 
         });
@@ -197,10 +200,14 @@ public class JanelaComposicao {
 
         botaoFilme.configurarEventoBotaoMenuItem(1, (informacoesDoEvento) -> {
             barraDeStatus.setText("Cliquei em listar Filme");
-
             // codigo de listar o filme
             FilmeDAO fdao = new FilmeDAO();
-            for (Filme f : fdao.read()) {
+            JPanel painel = new JPanel(new GridLayout(100, 1));
+
+            for (Filme f : fdao.read()) {              
+                painel.add(new JLabel(f.toString()));
+                janela.add(painel, BorderLayout.NORTH);  
+                      
                 System.out.println(f.toString());
             }
         });
