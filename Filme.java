@@ -30,8 +30,8 @@ public class Filme extends Animacao {
 
     @Override
     public String toString() {
-        return "id: " + getId() + "      Filme: " + getNome() + "\nClassificaçao indicativa: "
-                + getClassificacaoIndicativa() + "\nEstudio: " + getEstudio() + "\nGenero: " + getGenero()
-                + "\nAno de lançamento: " + getAno() + "\nDuraçao: " + getDuracao() + "\n";
+        return "id: " + getId() + "      Filme: " + getNome() + "      \nClassificaçao indicativa: "
+                + getClassificacaoIndicativa() + "      \nEstudio: " + getEstudio() + "      \nGenero: " + getGenero()
+                + "      \nAno de lançamento: " + getAno() + "      \nDuraçao: " + getDuracao() + "\n";
     } 
 }
