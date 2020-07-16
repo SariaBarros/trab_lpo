@@ -80,18 +80,18 @@ public class JanelaComposicao {
                 TemporadaDAO tempDao = new TemporadaDAO();
                 for (Temporada t : tempDao.readTemporada((Anime)a)) {      // percorre a lista retornada pelo tempDAO.readTemporada(a)
                     //codigo da interface gráfica para imprimir as temporadas
-                
+                    painel.add(new JLabel(t.toString()));
+
                     System.out.println(t.toString());            
                     
                     EpisodioDAO episodioDao = new EpisodioDAO();
                     for (Episodio e : episodioDao.readEpisodio(t, (Anime)a)) { // percorre a lista retornada pelo episodioDao.readEpisodio(t,a)
                         // codigo da interface gráfica para imprimir os episódios
-                        
+                        painel.add(new JLabel(e.toString()));
+
                         System.out.println(e.toString());
                     }                
-                
                 }    
-            
             }
 
         });
