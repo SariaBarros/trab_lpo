@@ -3,7 +3,9 @@ import javax.swing.JOptionPane;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class FilmeDAO {
+    final int MAX = 50;
     private Connection con;
 
     public FilmeDAO() {
@@ -44,6 +46,8 @@ public class FilmeDAO {
         ResultSet rs = null;
 
         List<Filme> filmes = new ArrayList<>();
+        Animacao novo[] = new Animacao[MAX];
+        int n = 0;
 
         try {
             stmt = con.prepareStatement("SELECT * FROM filme");
@@ -58,8 +62,13 @@ public class FilmeDAO {
                 int ano = rs.getInt("ano");
                 String duracao = rs.getString("duracao");
 
-                Filme novoFilme = new Filme(id, nome, classificacao, estudio, genero, ano, duracao);
+                //polifmorfismo
+                novo[n] = new Filme(id, nome, classificacao, estudio, genero, ano, duracao);
+                Filme novoFilme = (Filme)novo[n];
+                novo[n].adicionaAnimacao(novo, n, novoFilme);
+                
                 filmes.add(novoFilme); // add ao array q será retornado
+                n++;
             }
 
         } catch (SQLException e) {
