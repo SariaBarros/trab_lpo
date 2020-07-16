@@ -237,7 +237,17 @@ public class JanelaComposicao {
         botaoFilme.configurarEventoBotaoMenuItem(2, (informacoesDoEvento) -> {
             barraDeStatus.setText("Cliquei em atualizar Filme");
             // codigo de atualizar filme
+            int id = Leitor2.leInteiroDoTeclado("Informe o id do filme que será atualizado:");
+            String nome = Leitor2.leStringDoTeclado("Digite o nome do filme: ");
+            String classificacaoIndicativa = Leitor2.leStringDoTeclado("Informe a classificacao indicativa: ");
+            String estudio = Leitor2.leStringDoTeclado("Infrme o estudio: ");
+            String genero = Leitor2.leStringDoTeclado("Informe o genero: ");
+            int ano = Leitor2.leInteiroDoTeclado("Informe o ano do filme: ");
+            String duracao = Leitor2.leStringDoTeclado("Informe a duracao do filme: ");
 
+            Animacao filme = new Filme(id, nome, classificacaoIndicativa, estudio, genero, ano, duracao);
+            FilmeDAO filmeDAO = new FilmeDAO();
+            filmeDAO.update(filme);
         });
 
         botaoFilme.configurarEventoBotaoMenuItem(3, (informacoesDoEvento) -> {
