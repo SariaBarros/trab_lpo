@@ -71,7 +71,6 @@ public class EpisodioDAO {
         // array retornado à listagem dos Animes
         return episodios;
     }
-    // outros metodos: update(), delete()
 
     //update:
     public void UPDATE(Episodio ep) {
