@@ -3,8 +3,7 @@ import javax.swing.JOptionPane;
 import java.util.ArrayList;
 import java.util.List;
 
-
-public class FilmeDAO {
+public class FilmeDAO implements OperacoesCRUD{
     final int MAX = 50;
     private Connection con;
 
@@ -13,11 +12,15 @@ public class FilmeDAO {
 
     }
 
-    public void create(Filme f) { // inserção de dados nas tabelas do bd
+    //cadastrar
+    @Override
+    public void create(Animacao filme) { // inserção de dados nas tabelas do bd
 
         PreparedStatement stmt = null;
+        Filme f = (Filme)filme;
 
         try {
+
             // formação de statements a partir do objeto passado como parâmetro, para
             // executar o sql
             stmt = con.prepareStatement(
@@ -41,11 +44,13 @@ public class FilmeDAO {
         }
     }
 
-    public List<Filme> read() { // listagem dos filmes
+    //listar
+    @Override
+    public List<Animacao> read() { // listagem dos filmes
         PreparedStatement stmt = null;
         ResultSet rs = null;
 
-        List<Filme> filmes = new ArrayList<>();
+        List<Animacao> animacaoF = new ArrayList<>();
         Animacao novo[] = new Animacao[MAX];
         int n = 0;
 
@@ -66,27 +71,27 @@ public class FilmeDAO {
                 novo[n] = new Filme(id, nome, classificacao, estudio, genero, ano, duracao);
                 Filme novoFilme = (Filme)novo[n];
                 novo[n].adicionaAnimacao(novo, n, novoFilme);
-                
-                filmes.add(novoFilme); // add ao array q será retornado
-                n++;
+
+                animacaoF.add(novoFilme);    // add ao array q será retornado
+                n++;                
             }
 
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Erro ao salvar! " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro ao Listar! " + e.getMessage());
         } finally {
             ConexaoSQLite.desconectar(con, stmt, rs);
         }
         // array passado para ser listado no codigo da interface gráfica
-        return filmes;
 
+        return animacaoF;
     }
 
-    // outros metodos: update(), delete()
-
     //update
-    public void update(Filme f) { 
+    @Override
+    public void update(Animacao filme) { 
 
         PreparedStatement stmt = null;
+        Filme f = (Filme)filme;
 
         try {
             stmt = con.prepareStatement(
@@ -110,10 +115,12 @@ public class FilmeDAO {
         }
     }
 
-    //delete: 
-    public void DELETE(Filme f) { 
+    //delete:
+    @Override
+    public void delete(Animacao filme) { 
 
         PreparedStatement stmt = null;
+        Filme f = (Filme) filme;
 
         try {
             stmt = con.prepareStatement(
