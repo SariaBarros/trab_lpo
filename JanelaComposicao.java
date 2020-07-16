@@ -68,8 +68,30 @@ public class JanelaComposicao {
             barraDeStatus.setText("Cliquei em listar Anime");
             // codigo de listar o anime [todos]
             AnimeDAO animeDAO = new AnimeDAO();
-            //JPanel painel = new JPanel(new GridLayout(100, 1));
-            animeDAO.readAnime();
+            JPanel painel = new JPanel(new GridLayout(100, 1));
+            
+            for (Animacao a : animeDAO.read()) {
+                painel.add(new JLabel(a.toString()));
+                janela.add(painel, BorderLayout.NORTH);
+
+                System.out.println(a.toString());
+            
+                TemporadaDAO tempDao = new TemporadaDAO();
+                for (Temporada t : tempDao.readTemporada((Anime)a)) {      // percorre a lista retornada pelo tempDAO.readTemporada(a)
+                    //codigo da interface gráfica para imprimir as temporadas
+                
+                    System.out.println(t.toString());            
+                    
+                    EpisodioDAO episodioDao = new EpisodioDAO();
+                    for (Episodio e : episodioDao.readEpisodio(t, (Anime)a)) { // percorre a lista retornada pelo episodioDao.readEpisodio(t,a)
+                        // codigo da interface gráfica para imprimir os episódios
+                        
+                        System.out.println(e.toString());
+                    }                
+                
+                }    
+            
+            }
 
         });
 
@@ -204,7 +226,7 @@ public class JanelaComposicao {
             FilmeDAO fdao = new FilmeDAO();
             JPanel painel = new JPanel(new GridLayout(100, 1));
 
-            for (Filme f : fdao.read()) {              
+            for (Animacao f : fdao.read()) {              
                 painel.add(new JLabel(f.toString()));
                 janela.add(painel, BorderLayout.NORTH);  
                       
