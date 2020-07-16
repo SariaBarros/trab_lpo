@@ -35,7 +35,7 @@ public class AnimeDAO {
 
     }
 
-    public void readAnime() {
+    public List<Anime> readAnime() {
         PreparedStatement stmtAnime = null;
         ResultSet rsAnime = null;
 
@@ -57,6 +57,7 @@ public class AnimeDAO {
             }
 
             // imprimindo a tabela de animes
+            /*
             for (Anime a : animes) {
                 System.out.println(a.toString());
 
@@ -73,7 +74,7 @@ public class AnimeDAO {
                 
                 }
 
-            }
+            }*/
 
 
         } catch (SQLException e) {
@@ -82,7 +83,7 @@ public class AnimeDAO {
             ConexaoSQLite.desconectar(con, stmtAnime, rsAnime);
         }
         // array passado para ser listado no codigo da interface gráfica
-        // return animes;
+        return animes;
     }
 
     // outros metodos: update(), delete()
