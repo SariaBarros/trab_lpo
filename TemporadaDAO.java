@@ -11,6 +11,7 @@ public class TemporadaDAO {
         this.con = ConexaoSQLite.conectar();
     }
 
+    //cadastrar
     public void create(Temporada t) {
 
         PreparedStatement stmt = null;
@@ -38,7 +39,7 @@ public class TemporadaDAO {
         }
     }
 
-    // editar
+    // listar
     public List<Temporada> readTemporada(Anime anime) { // retorna um array de temporadas que sao listadas no read() de
                                                         // AnimeDAO
         PreparedStatement stmt = null;
@@ -64,7 +65,7 @@ public class TemporadaDAO {
             }
 
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Erro ao salvar! " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro ao listar! " + e.getMessage());
         } finally {
             ConexaoSQLite.desconectar(con, stmt, rs);
         }
