@@ -4,6 +4,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 public class AnimeDAO {
+    final int MAX = 2;
     private Connection con;
 
     public AnimeDAO() {
@@ -40,6 +41,8 @@ public class AnimeDAO {
         ResultSet rsAnime = null;
 
         List<Anime> animes = new ArrayList<>();
+        Animacao novo[] = new Animacao[MAX];
+        int n = 0;
 
         try {
             stmtAnime = con.prepareStatement("SELECT * FROM anime");
@@ -52,8 +55,13 @@ public class AnimeDAO {
                 String estudio = rsAnime.getString("estudio_anime");
                 String genero = rsAnime.getString("genero_anime");
 
-                Anime novoAnime = new Anime(idAnime, nome, classificacao, estudio, genero);
+                //polimorfismo
+                novo[n] = new Anime(idAnime, nome, classificacao, estudio, genero);
+                Anime novoAnime = (Anime)novo[n];
+                novo[n].adicionaAnimacao(novo, n, novoAnime);
+
                 animes.add(novoAnime); // add ao array de animes q será percorrido no primeiro laço
+                n++;
             }
 
             // imprimindo a tabela de animes
