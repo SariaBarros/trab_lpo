@@ -3,17 +3,20 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 
-public class AnimeDAO {
-    final int MAX = 2;
+public class AnimeDAO implements OperacoesCRUD{
+    final int MAX = 50;
     private Connection con;
 
     public AnimeDAO() {
         this.con = ConexaoSQLite.conectar();
     }
 
-    public void create(Anime a) {
+    //cadastrar
+    @Override
+    public void create(Animacao anime) {
 
         PreparedStatement stmt = null;
+        Anime a = (Anime)anime;
 
         try {
             // formação de statements para executar sql
@@ -36,11 +39,13 @@ public class AnimeDAO {
 
     }
 
-    public List<Anime> readAnime() {
+    // listar
+    @Override
+    public List<Animacao> read() {
         PreparedStatement stmtAnime = null;
         ResultSet rsAnime = null;
 
-        List<Anime> animes = new ArrayList<>();
+        List<Animacao> animacaoA = new ArrayList<>();
         Animacao novo[] = new Animacao[MAX];
         int n = 0;
 
@@ -60,46 +65,25 @@ public class AnimeDAO {
                 Anime novoAnime = (Anime)novo[n];
                 novo[n].adicionaAnimacao(novo, n, novoAnime);
 
-                animes.add(novoAnime); // add ao array de animes q será percorrido no primeiro laço
+                animacaoA.add(novoAnime); // add ao array de animes q será percorrido no primeiro laço
                 n++;
             }
 
-            // imprimindo a tabela de animes
-            /*
-            for (Anime a : animes) {
-                System.out.println(a.toString());
-
-                // imprimindo as temporadas
-                TemporadaDAO tempDao = new TemporadaDAO();
-                for (Temporada t : tempDao.readTemporada(a)) {      // percorre a lista retornada pelo tempDAO.readTemporada(a)
-                        System.out.println(t.toString());
-
-                    // imprimindo os episódios
-                    EpisodioDAO episodioDao = new EpisodioDAO();
-                    for (Episodio e : episodioDao.readEpisodio(t, a)) {     // percorre a lista retornada pelo epidodioDao.readEpisodio(t,a)
-                        System.out.println(e.toString());
-                    }
-                
-                }
-
-            }*/
-
-
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Erro ao salvar! " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro ao listar! " + e.getMessage());
         } finally {
             ConexaoSQLite.desconectar(con, stmtAnime, rsAnime);
         }
         // array passado para ser listado no codigo da interface gráfica
-        return animes;
+        return animacaoA;
     }
 
-    // outros metodos: update(), delete()
-
     //update
-    public void UPDATE(Anime a) {
+    @Override
+    public void update(Animacao anime) {
 
         PreparedStatement stmt = null;
+        Animacao a = (Animacao)anime;
 
         try {
             // formação de statements para executar sql
@@ -124,10 +108,11 @@ public class AnimeDAO {
     }
 
     //delete:
-
-    public void DELETE(Anime a) {
+    @Override
+    public void delete(Animacao anime) {
 
         PreparedStatement stmt = null;
+        Animacao a = (Animacao) anime;
 
         try {
             stmt = con.prepareStatement(
