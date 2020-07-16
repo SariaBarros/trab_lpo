@@ -59,8 +59,8 @@ public class Temporada {
 
     @Override
     public String toString() {
-        return "Temporada [" + getId() + "]\nEstaçao: " + getEstacao() + "\nData de início: " + getDataInicio()
-                + "\nData de término: " + getDataTermino();
+        return "Temporada [" + getId() + "]      \nEstaçao: " + getEstacao() + "      \nData de início: " + getDataInicio()
+                + "      \nData de término: " + getDataTermino();
     }
 
 }

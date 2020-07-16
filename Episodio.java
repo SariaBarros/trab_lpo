@@ -59,7 +59,7 @@ public class Episodio {
     @Override
     public String toString() {
 
-        return "Episodio [" + getId() + "]: " + getTitulo() + "\nDuraçao: " + getDuracao() + "\n";
+        return "Episodio [" + getId() + "]: " + getTitulo() + "      \nDuraçao: " + getDuracao() + "\n";
     }
 
 }

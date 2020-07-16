@@ -14,7 +14,7 @@ public class Anime extends Animacao {
 
     @Override
     public String toString() {
-        return "id: " + getId() + "      Anime: " + getNome() + "\nClassificaçao indicativa: "
-                + getClassificacaoIndicativa() + "\nEstudio: " + getEstudio() + "\nGenero: " + getGenero() + "\n";
+        return "id: " + getId() + "      Anime: " + getNome() + "      \nClassificaçao indicativa: "
+                + getClassificacaoIndicativa() + "      \nEstudio: " + getEstudio() + "      \nGenero: " + getGenero() + "\n";
     }
 }
