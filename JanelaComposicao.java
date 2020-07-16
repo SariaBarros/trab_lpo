@@ -71,24 +71,24 @@ public class JanelaComposicao {
             barraDeStatus.setText("Cliquei em listar Anime");
             // codigo de listar o anime [todos]
             AnimeDAO animeDAO = new AnimeDAO();
-            
+            painel.removeAll();
             for (Animacao a : animeDAO.read()) {
                 painel.add(new JLabel(a.toString()));
-
+                
                 System.out.println(a.toString());
             
                 TemporadaDAO tempDao = new TemporadaDAO();
                 for (Temporada t : tempDao.readTemporada((Anime)a)) {      // percorre a lista retornada pelo tempDAO.readTemporada(a)
                     //codigo da interface gráfica para imprimir as temporadas
                     painel.add(new JLabel(t.toString()));
-
+                    
                     System.out.println(t.toString());            
                     
                     EpisodioDAO episodioDao = new EpisodioDAO();
                     for (Episodio e : episodioDao.readEpisodio(t, (Anime)a)) { // percorre a lista retornada pelo episodioDao.readEpisodio(t,a)
                         // codigo da interface gráfica para imprimir os episódios
                         painel.add(new JLabel(e.toString()));
-
+                        
                         System.out.println(e.toString());
                     }                
                 }    
@@ -225,10 +225,10 @@ public class JanelaComposicao {
             barraDeStatus.setText("Cliquei em listar Filme");
             // codigo de listar o filme
             FilmeDAO fdao = new FilmeDAO();
-
+            painel.removeAll();
             for (Animacao f : fdao.read()) {              
                 painel.add(new JLabel(f.toString()));  
-                      
+                
                 System.out.println(f.toString());
             }
         });
