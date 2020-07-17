@@ -21,12 +21,11 @@ public class AnimeDAO implements OperacoesCRUD{
         try {
             // formação de statements para executar sql
             stmt = con.prepareStatement(
-                    "INSERT INTO anime (pk_id_anime,nome_anime,classificacaoIndicativa_anime,estudio_anime,genero_anime)VALUES(?,?,?,?,?)");
-            stmt.setInt(1, a.getId());
-            stmt.setString(2, a.getNome());
-            stmt.setString(3, a.getClassificacaoIndicativa());
-            stmt.setString(4, a.getEstudio());
-            stmt.setString(5, a.getGenero());
+                    "INSERT INTO anime (nome_anime,classificacaoIndicativa_anime,estudio_anime,genero_anime)VALUES(?,?,?,?)");
+            stmt.setString(1, a.getNome());
+            stmt.setString(2, a.getClassificacaoIndicativa());
+            stmt.setString(3, a.getEstudio());
+            stmt.setString(4, a.getGenero());
 
             stmt.executeUpdate(); // executa a inserção
             JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
@@ -88,13 +87,13 @@ public class AnimeDAO implements OperacoesCRUD{
         try {
             // formação de statements para executar sql
             stmt = con.prepareStatement(
-                    "UPDATE anime SET pk_id_anime = ?, nome_anime = ?, classificacaoIndicativa_anime = ?, estudio_anime = ?, genero_anime = ? WHERE id = ?");
-            stmt.setInt(1, a.getId());
-            stmt.setString(2, a.getNome());
-            stmt.setString(3, a.getClassificacaoIndicativa());
-            stmt.setString(4, a.getEstudio());
-            stmt.setString(5, a.getGenero());
-            stmt.setInt(6, a.getId());
+                    "UPDATE anime SET nome_anime = ?, classificacaoIndicativa_anime = ?, estudio_anime = ?, genero_anime = ? WHERE pk_id_anime = ?");
+            
+            stmt.setString(1, a.getNome());
+            stmt.setString(2, a.getClassificacaoIndicativa());
+            stmt.setString(3, a.getEstudio());
+            stmt.setString(4, a.getGenero());
+            stmt.setInt(5, a.getId());
 
             stmt.executeUpdate();
             JOptionPane.showMessageDialog(null, "Atualizado com sucesso!");
@@ -116,7 +115,7 @@ public class AnimeDAO implements OperacoesCRUD{
 
         try {
             stmt = con.prepareStatement(
-                    "DELETE FROM anime WHERE id = ?");
+                    "DELETE FROM anime WHERE pk_id_anime = ?");
             stmt.setInt(1, a.getId());
 
             stmt.executeUpdate();
