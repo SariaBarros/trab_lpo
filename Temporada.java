@@ -2,27 +2,56 @@
 public class Temporada {
 
     private int id;
+    private int numeroTemp; 
     private String estacao;
     private String dataInicio;
     private String dataTermino;
 
     private Anime fkAnime; // **funcionará como FK - inserida em TemporadaDAO.create() por composição
 
-    public Temporada(int id, final String estacao, String dataInicio, String dataTermino, Anime fkAnime) {
+    // construtor padrão
+    public Temporada(int id, int numeroTemp, String estacao, String dataInicio, String dataTermino, Anime fkAnime) {
         setId(id);
+        setNumeroTemp(numeroTemp);
+        setEstacao(estacao);
+        setDataInicio(dataInicio);
+        setDataTermino(dataTermino);
+        setFkanime(fkAnime);
+    }
+    
+    // construtor para o CREATE - sem id
+    public Temporada(int numeroTemp, String estacao, String dataInicio, String dataTermino, Anime fkAnime) {
+        setNumeroTemp(numeroTemp);
         setEstacao(estacao);
         setDataInicio(dataInicio);
         setDataTermino(dataTermino);
         setFkanime(fkAnime);
     }
 
+    // construtor para o UPDATE - sem fk
+    public Temporada(int id, int numeroTemp, String estacao, String dataInicio, String dataTermino) {
+        setId(id);
+        setNumeroTemp(numeroTemp);
+        setEstacao(estacao);
+        setDataInicio(dataInicio);
+        setDataTermino(dataTermino);
+    }
+
     // getters e setters
     public int getId() {
         return id;
     }
-
+    
     public void setId(int id) {
         this.id = id;
+    }
+    
+    public int getNumeroTemp() {
+        return numeroTemp;
+    }
+
+    public void setNumeroTemp(int numeroTemp) {
+        this.numeroTemp = numeroTemp;
     }
 
     public String getDataInicio() {
@@ -45,7 +74,7 @@ public class Temporada {
         return estacao;
     }
 
-    public void setEstacao(final String estacao) {
+    public void setEstacao(String estacao) {
         this.estacao = estacao;
     }
 
@@ -59,8 +88,9 @@ public class Temporada {
 
     @Override
     public String toString() {
-        return "Temporada [" + getId() + "]      \nEstaçao: " + getEstacao() + "      \nData de início: " + getDataInicio()
+        return "idT: " + getId() + "" + "       Temporada [" + getNumeroTemp() + "]  Estaçao: " + getEstacao() + "      \nData de início: " + getDataInicio()
                 + "      \nData de término: " + getDataTermino();
     }
+
 
 }
