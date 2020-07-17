@@ -40,28 +40,28 @@ public class EpisodioDAO {
     }
 
     // listagem de episódios
-    public List<Episodio> readEpisodio(Temporada temp, Anime an) { // retorna um array de episodios que sao listados no
+    public List<Episodio> readEpisodio(int fkTemp) { // retorna um array de episodios que sao listados no
                                                                    // read() de AnimeDAO
         PreparedStatement stmt = null;
         ResultSet rs = null;
 
         List<Episodio> episodios = new ArrayList<>();
 
-        try {
-            // consulta INNER JOIN: retorna a linha da tabela episodio que possui a
-            // fk_temporada == id_temporada AND fk_anime == id_anime
-            stmt = con.prepareStatement(
-                    "SELECT * FROM ((episodio INNER JOIN temporada ON episodio.fk_temporada_id = temporada.pk_id_temp) INNER JOIN anime ON episodio.fk_anime_id = anime.pk_id_anime)");
+        try {         
+            stmt = con.prepareStatement("SELECT * FROM episodio");
             rs = stmt.executeQuery();
 
             while (rs.next()) { // percorre as tabelas que atendem à consulta acima
-                int idEpisodio = rs.getInt("pk_id_ep");
-                int numeroEp = rs.getInt("numeroEp");
-                String titulo = rs.getString("titulo_ep");
-                String duracao = rs.getString("duracao_ep");
-
-                Episodio novoEp = new Episodio(idEpisodio, numeroEp, titulo, duracao, temp, an);
-                episodios.add(novoEp); // add ao array q será retornado
+                
+                if(rs.getInt("fk_temporada_id") == fkTemp){         //seleciona os eps pela fk de temporada 
+                    int idEpisodio = rs.getInt("pk_id_ep");
+                    int numeroEp = rs.getInt("numeroEp");
+                    String titulo = rs.getString("titulo_ep");
+                    String duracao = rs.getString("duracao_ep");
+                    
+                    Episodio novoEp = new Episodio(idEpisodio, numeroEp, titulo, duracao);
+                    episodios.add(novoEp); // add ao array q será retornado
+                }
             }
 
         } catch (SQLException e) {
