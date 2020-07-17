@@ -40,7 +40,7 @@ public class TemporadaDAO {
     }
 
     // listar
-    public List<Temporada> readTemporada(Anime anime) { // retorna um array de temporadas que sao listadas no read() de
+    public List<Temporada> readTemporada(int fkAnime) { // retorna um array de temporadas que sao listadas no read() de
                                                         // AnimeDAO
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -50,19 +50,22 @@ public class TemporadaDAO {
         try {
             // consulta INNER JOIN: retorna a linha da tabela temporada que possui a
             // fk.temporada == id.temporada AND fk.anime == id.anime
-            stmt = con.prepareStatement(
-                    "SELECT * FROM temporada INNER JOIN anime ON temporada.fk_anime_id = anime.pk_id_anime");
+            stmt = con.prepareStatement("SELECT * FROM temporada");
+                    //"SELECT * FROM temporada INNER JOIN anime ON temporada.fk_anime_id = anime.pk_id_anime"
             rs = stmt.executeQuery();
 
             while (rs.next()) { // percorre as tabelas que atendem à consulta acima
-                int idTemp = rs.getInt("pk_id_temp");
-                int numeroTemp = rs.getInt("numeroTemp");
-                String estacao = rs.getString("estacao_temp");
-                String dataInicio = rs.getString("dataInicio");
-                String dataTermino = rs.getString("dataTermino");
-
-                Temporada novaTemp = new Temporada(idTemp, numeroTemp, estacao, dataInicio, dataTermino, anime);
-                temporadas.add(novaTemp); // add ao array q será retornado para read() de AnimeDAO
+                
+                if(rs.getInt("fk_anime_id") == fkAnime){            // seleciona os temporadas pela fk de ep
+                    int idTemp = rs.getInt("pk_id_temp");
+                    int numeroTemp = rs.getInt("numeroTemp");
+                    String estacao = rs.getString("estacao_temp");
+                    String dataInicio = rs.getString("dataInicio");
+                    String dataTermino = rs.getString("dataTermino");
+                    
+                    Temporada novaTemp = new Temporada(idTemp, numeroTemp, estacao, dataInicio, dataTermino);
+                    temporadas.add(novaTemp); // add ao array q será retornado para read() de AnimeDAO
+                }
             }
 
         } catch (SQLException e) {
