@@ -54,17 +54,18 @@ public class JanelaComposicao {
 
         botaoAnime.configurarEventoBotaoMenuItem(0, (informacoesDoEvento) -> {
             barraDeStatus.setText("Cliquei em cadastrar Anime");
-            int id = Leitor2.leInteiroDoTeclado("Informe o id do anime");
+            
             String nome = Leitor2.leStringDoTeclado("Digite o nome: ");
             String classificacaoIndicativa = Leitor2.leStringDoTeclado("Digite qual eh a classificacao indicada: ");
             String estudio = Leitor2.leStringDoTeclado("Digite qual eh o estudio: ");
             String genero = Leitor2.leStringDoTeclado("Digite um genero: ");
 
-            Anime anime = new Anime(id, nome, classificacaoIndicativa, estudio, genero);
+            Anime anime = new Anime(nome, classificacaoIndicativa, estudio, genero);
             AnimeDAO aDao = new AnimeDAO();
             aDao.create(anime);
 
-            JOptionPane.showMessageDialog(null, "Para adicionar temporadas clique em Temporada > Cadastrar");
+            JOptionPane.showMessageDialog(null, "Para um novo Anime, eh preciso cadastrar pelo menos uma Temporada  \nPara adicionar temporadas clique em Temporada > Cadastrar");
+
         });
 
         botaoAnime.configurarEventoBotaoMenuItem(1, (informacoesDoEvento) -> {
@@ -98,14 +99,27 @@ public class JanelaComposicao {
 
         botaoAnime.configurarEventoBotaoMenuItem(2, (informacoesDoEvento) -> {
             barraDeStatus.setText("Cliquei em atualizar Anime");
+            
             // codigo de atualizar anime
+            int id = Leitor2.leInteiroDoTeclado("Informe o id do Anime que será atualizado: ");
+            String nome = Leitor2.leStringDoTeclado("Digite o nome do Anime: ");
+            String classificacaoIndicativa = Leitor2.leStringDoTeclado("Digite qual eh a classificacao indicativa: ");
+            String estudio = Leitor2.leStringDoTeclado("Digite qual eh o estudio: ");
+            String genero = Leitor2.leStringDoTeclado("Digite um genero: ");
+
+            Anime anime = new Anime(id, nome, classificacaoIndicativa, estudio, genero);
+            AnimeDAO aDao = new AnimeDAO();
+            aDao.update(anime);
 
         });
 
         botaoAnime.configurarEventoBotaoMenuItem(3, (informacoesDoEvento) -> {
             barraDeStatus.setText("Cliquei em deletar Anime");
             // codigo de deletar anime
-
+            int id = Leitor2.leInteiroDoTeclado("Informe o id do Anime que será deletado: ");
+            Anime anime = new Anime(id, null, null, null, null);
+            AnimeDAO aDao = new AnimeDAO();
+            aDao.delete(anime);
         });
     }
 
@@ -119,30 +133,43 @@ public class JanelaComposicao {
             barraDeStatus.setText("Cliquei em cadastrar Temporada");
 
             // codigo de cadastrar Temporada
-            int idTemp = Leitor2.leInteiroDoTeclado("Informe o id da temporada");
+            int numeroTemp = Leitor2.leInteiroDoTeclado("Informe o número da Temporada:");
             String estacao = Leitor2.leStringDoTeclado("Informe a estaçao da temporada:");
             String dataInicio = Leitor2.leStringDoTeclado("Informe a data de estreia da temporada (dd/mm/aaaa):");
             String dataTermino = Leitor2.leStringDoTeclado("Informe a data de término da temporada (dd/mm/aaaa):");
             int fktemp = Leitor2.leInteiroDoTeclado("Informe o id do Anime ao qual a temporada pertence:");
 
             Anime anime = new Anime(fktemp, null, null, null, null);
-            Temporada temporada = new Temporada(idTemp, estacao, dataInicio, dataTermino, anime);
+            Temporada temporada = new Temporada(numeroTemp, estacao, dataInicio, dataTermino, anime);
             TemporadaDAO tempDao = new TemporadaDAO();
             tempDao.create(temporada);
 
-            JOptionPane.showMessageDialog(null, "Para adicionar episódios clique em Episodio > Cadastrar");
+            JOptionPane.showMessageDialog(null, "Para uma nova Temporada, eh preciso cadastrar pelo menos um Episodio   \nPara adicionar episodios clique em Episodio > Cadastrar");
         });
 
         botaoTemporada.configurarEventoBotaoMenuItem(1, (informacoesDoEvento) -> {
             barraDeStatus.setText("Cliquei em atualizar Temporada");
+            
             // codigo de atualizar temporada
+            int id = Leitor2.leInteiroDoTeclado("Informe o id da Temporada que será atualizada:");
+            int numeroTemp = Leitor2.leInteiroDoTeclado("Informe o número da Temporada:");
+            String estacao = Leitor2.leStringDoTeclado("Informe a estaçao da temporada:");
+            String dataInicio = Leitor2.leStringDoTeclado("Informe a data de estreia da temporada (dd/mm/aaaa):");
+            String dataTermino = Leitor2.leStringDoTeclado("Informe a data de término da temporada (dd/mm/aaaa):");
+
+            Temporada temp = new Temporada(id, numeroTemp, estacao, dataInicio, dataTermino);
+            TemporadaDAO tempDAO = new TemporadaDAO();
+            tempDAO.UPDATE(temp);
 
         });
 
         botaoTemporada.configurarEventoBotaoMenuItem(2, (informacoesDoEvento) -> {
             barraDeStatus.setText("Cliquei em deletar Temporada");
             // codigo de deletar temporada
-
+            int id = Leitor2.leInteiroDoTeclado("Informe o id da Temporada que será deletada: ");
+            Temporada temp = new Temporada(id, 0, null, null, null);
+            TemporadaDAO tempDAO = new TemporadaDAO();
+            tempDAO.DELETE(temp);
         });
     }
 
@@ -156,16 +183,16 @@ public class JanelaComposicao {
             barraDeStatus.setText("Cliquei em cadastrar Episodio");
 
             // codigo de cadastrar Episodio
-            int idEp = Leitor2.leInteiroDoTeclado("Informe o id do episódio:");
+            int numeroEp = Leitor2.leInteiroDoTeclado("Informe o numero do episódio:");
             String titulo = Leitor2.leStringDoTeclado("Informe o título do episódio:");
             String duracao = Leitor2.leStringDoTeclado("Informe a duraçao do episodio");
-            int fkepTemp = Leitor2.leInteiroDoTeclado("Informe o id do temporada à qual o episodio pertence:");
+            int fkepTemp = Leitor2.leInteiroDoTeclado("Informe o id da temporada à qual o episodio pertence:");
             int fkepAnime = Leitor2.leInteiroDoTeclado("Informe o id do anime ao qual o episodio pertence:");
 
+            Temporada temp = new Temporada(fkepTemp, 0, null, null, null);      // definindo a fk da tab temporada
             Anime anime = new Anime(fkepAnime, null, null, null, null); // definindo a fk da tab anime
-            Temporada temp = new Temporada(fkepTemp, null, null, null, null); // definindo a fk da tab temporada
-            // criçao do ep
-            Episodio episodio = new Episodio(idEp, titulo, duracao, temp, anime);
+            // criaçao do ep
+            Episodio episodio = new Episodio(numeroEp, titulo, duracao, temp, anime);
             EpisodioDAO epDao = new EpisodioDAO();
             epDao.create(episodio);
 
@@ -174,12 +201,24 @@ public class JanelaComposicao {
         botaoEpisodio.configurarEventoBotaoMenuItem(1, (informacoesDoEvento) -> {
             barraDeStatus.setText("Cliquei em atualizar Episodio");
             // codigo de atualizar Episodio
+            int id = Leitor2.leInteiroDoTeclado("Informe o id do Episodio que será atualizado: ");
+            int numeroEp = Leitor2.leInteiroDoTeclado("Informe o numero do episódio:");
+            String titulo = Leitor2.leStringDoTeclado("Informe o título do episódio:");
+            String duracao = Leitor2.leStringDoTeclado("Informe a duraçao do episodio");
+            
+            Episodio episodio = new Episodio(id, numeroEp, titulo, duracao);
+            EpisodioDAO epDAO = new EpisodioDAO();
+            epDAO.UPDATE(episodio);
 
         });
 
         botaoEpisodio.configurarEventoBotaoMenuItem(2, (informacoesDoEvento) -> {
             barraDeStatus.setText("Cliquei em deletar Episodio");
             // codigo de deletar Episodio
+            int id = Leitor2.leInteiroDoTeclado("Informe o id do Episodio que será deletado: ");
+            Episodio episodio = new Episodio(id, 0, null, null);
+            EpisodioDAO epDAO = new EpisodioDAO();
+            epDAO.DELETE(episodio);
 
         });
     }
@@ -194,7 +233,6 @@ public class JanelaComposicao {
         botaoFilme.configurarEventoBotaoMenuItem(0, (informacoesDoEvento) -> {
             barraDeStatus.setText("Cliquei em cadastrar Filme");
 
-            int id = Leitor2.leInteiroDoTeclado("Informe o id do filme");
             String nome = Leitor2.leStringDoTeclado("Digite o nome: ");
             String classificacaoIndicativa = Leitor2.leStringDoTeclado("Digite qual eh a classificacao indicada: ");
             String estudio = Leitor2.leStringDoTeclado("Digite qual eh o estudio: ");
@@ -202,7 +240,7 @@ public class JanelaComposicao {
             int ano = Leitor2.leInteiroDoTeclado("Digite o ano que o filme foi criado: ");
             String duracao = Leitor2.leStringDoTeclado("Digite a duracao do filme: ");
 
-            Filme filme = new Filme(id, nome, classificacaoIndicativa, estudio, genero, ano, duracao);
+            Filme filme = new Filme(nome, classificacaoIndicativa, estudio, genero, ano, duracao);
             FilmeDAO filmedao = new FilmeDAO();
             filmedao.create(filme);
         });
@@ -222,10 +260,10 @@ public class JanelaComposicao {
         botaoFilme.configurarEventoBotaoMenuItem(2, (informacoesDoEvento) -> {
             barraDeStatus.setText("Cliquei em atualizar Filme");
             // codigo de atualizar filme
-            int id = Leitor2.leInteiroDoTeclado("Informe o id do filme que será atualizado:");
+            int id = Leitor2.leInteiroDoTeclado("Informe o id do Filme que será atualizado: ");
             String nome = Leitor2.leStringDoTeclado("Digite o nome do filme: ");
             String classificacaoIndicativa = Leitor2.leStringDoTeclado("Informe a classificacao indicativa: ");
-            String estudio = Leitor2.leStringDoTeclado("Infrme o estudio: ");
+            String estudio = Leitor2.leStringDoTeclado("Informe o estudio: ");
             String genero = Leitor2.leStringDoTeclado("Informe o genero: ");
             int ano = Leitor2.leInteiroDoTeclado("Informe o ano do filme: ");
             String duracao = Leitor2.leStringDoTeclado("Informe a duracao do filme: ");
@@ -238,7 +276,10 @@ public class JanelaComposicao {
         botaoFilme.configurarEventoBotaoMenuItem(3, (informacoesDoEvento) -> {
             barraDeStatus.setText("Cliquei em deletar Filme");
             // codigo de deletar filme
-
+            int id = Leitor2.leInteiroDoTeclado("Informe o id do Filme que será deletado: ");
+            Filme filme = new Filme(id, null, null, null, null, 0, null);
+            FilmeDAO filmeDAO = new FilmeDAO();
+            filmeDAO.delete(filme);
         });
     }
 }
