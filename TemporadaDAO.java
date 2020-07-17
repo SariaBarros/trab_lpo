@@ -73,5 +73,53 @@ public class TemporadaDAO {
         return temporadas;
 
     }
-    // outros metodos: update(), delete()
+
+    //update:
+    public void UPDATE(Temporada t) {
+
+        PreparedStatement stmt = null;
+
+        try {
+
+            stmt = con.prepareStatement(
+                    "UPDATE temporada SET pk_id_temp = ?, estacao_temp = ?, dataInicio = ?, dataTermino = ?, fk_anime_id = ? WHERE id = ?");
+            
+            stmt.setInt(1, t.getId());
+            stmt.setString(2, t.getEstacao());
+            stmt.setString(3, t.getDataInicio());
+            stmt.setString(4, t.getDataTermino());
+            stmt.setInt(5, t.getFkanime().getId()); 
+            stmt.setInt(6, t.getId());
+
+            stmt.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Atualizado com sucesso!");
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro ao atualizar! " + e.getMessage());
+        } finally {
+            ConexaoSQLite.desconectar(con, stmt);
+        }
+    }
+
+    //delete
+
+    public void DELETE(Temporada t) {
+
+        PreparedStatement stmt = null;
+
+        try {
+           
+            stmt = con.prepareStatement(
+                    "DELETE FROM temporada WHERE id = ?");
+            stmt.setInt(1, t.getId());
+
+            stmt.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Excluído com sucesso!");
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro ao Excluir! " + e.getMessage());
+        } finally {
+            ConexaoSQLite.desconectar(con, stmt);
+        }
+    }
 }
