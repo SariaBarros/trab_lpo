@@ -20,9 +20,9 @@ public class TemporadaDAO {
             // formação de statements a partir do objeto passado como parâmetro, para
             // executar o sql
             stmt = con.prepareStatement(
-                    "INSERT INTO temporada (pk_id_temp,estacao_temp,dataInicio,dataTermino,fk_anime_id)VALUES(?,?,?,?,?)");
+                    "INSERT INTO temporada (numeroTemp,estacao_temp,dataInicio,dataTermino,fk_anime_id)VALUES(?,?,?,?,?)");
             // a seguir, captura de dados do objeto para o statement
-            stmt.setInt(1, t.getId());
+            stmt.setInt(1, t.getNumeroTemp());
             stmt.setString(2, t.getEstacao());
             stmt.setString(3, t.getDataInicio());
             stmt.setString(4, t.getDataTermino());
@@ -56,11 +56,12 @@ public class TemporadaDAO {
 
             while (rs.next()) { // percorre as tabelas que atendem à consulta acima
                 int idTemp = rs.getInt("pk_id_temp");
+                int numeroTemp = rs.getInt("numeroTemp");
                 String estacao = rs.getString("estacao_temp");
                 String dataInicio = rs.getString("dataInicio");
                 String dataTermino = rs.getString("dataTermino");
 
-                Temporada novaTemp = new Temporada(idTemp, estacao, dataInicio, dataTermino, anime);
+                Temporada novaTemp = new Temporada(idTemp, numeroTemp, estacao, dataInicio, dataTermino, anime);
                 temporadas.add(novaTemp); // add ao array q será retornado para read() de AnimeDAO
             }
 
@@ -82,9 +83,9 @@ public class TemporadaDAO {
         try {
 
             stmt = con.prepareStatement(
-                    "UPDATE temporada SET pk_id_temp = ?, estacao_temp = ?, dataInicio = ?, dataTermino = ?, fk_anime_id = ? WHERE id = ?");
+                    "UPDATE temporada SET numeroTemp = ?, estacao_temp = ?, dataInicio = ?, dataTermino = ?, fk_anime_id = ? WHERE  pk_id_temp = ?");
             
-            stmt.setInt(1, t.getId());
+            stmt.setInt(1, t.getNumeroTemp());
             stmt.setString(2, t.getEstacao());
             stmt.setString(3, t.getDataInicio());
             stmt.setString(4, t.getDataTermino());
@@ -109,8 +110,7 @@ public class TemporadaDAO {
 
         try {
            
-            stmt = con.prepareStatement(
-                    "DELETE FROM temporada WHERE id = ?");
+            stmt = con.prepareStatement("DELETE FROM temporada WHERE pk_id_temp = ?");
             stmt.setInt(1, t.getId());
 
             stmt.executeUpdate();
