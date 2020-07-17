@@ -18,9 +18,9 @@ public class EpisodioDAO {
             // formação de statements a partir do objeto passado como parâmetro, para
             // executar o sql
             stmt = con.prepareStatement(
-                    "INSERT INTO episodio (pk_id_ep,titulo_ep,duracao_ep,fk_temporada_id,fk_anime_id)VALUES(?,?,?,?,?)");
+                    "INSERT INTO episodio (numeroEp,titulo_ep,duracao_ep,fk_temporada_id,fk_anime_id)VALUES(?,?,?,?,?)");
             // a seguir, captura de dados do objeto para o statement
-            stmt.setInt(1, ep.getId());
+            stmt.setInt(1, ep.getNumeroEp());
             stmt.setString(2, ep.getTitulo());
             stmt.setString(3, ep.getDuracao());
             stmt.setInt(4, ep.getFktemp().getId()); // inserção da fk com valor igual ao id da respectiva temporada ->
@@ -55,11 +55,12 @@ public class EpisodioDAO {
             rs = stmt.executeQuery();
 
             while (rs.next()) { // percorre as tabelas que atendem à consulta acima
-                int idTemporada = rs.getInt("pk_id_ep");
+                int idEpisodio = rs.getInt("pk_id_ep");
+                int numeroEp = rs.getInt("numeroEp");
                 String titulo = rs.getString("titulo_ep");
                 String duracao = rs.getString("duracao_ep");
 
-                Episodio novoEp = new Episodio(idTemporada, titulo, duracao, temp, an);
+                Episodio novoEp = new Episodio(idEpisodio, numeroEp, titulo, duracao, temp, an);
                 episodios.add(novoEp); // add ao array q será retornado
             }
 
@@ -80,9 +81,9 @@ public class EpisodioDAO {
         try {
             
             stmt = con.prepareStatement(
-                    "UPDATE episodio SET pk_id_ep = ?, titulo_ep = ?, duracao_ep = ?, fk_temporada_id = ?, fk_anime_id = ? WHERE id = ?");
+                    "UPDATE episodio SET numeroEp = ?, titulo_ep = ?, duracao_ep = ?, fk_temporada_id = ?, fk_anime_id = ? WHERE pk_id_ep = ?");
             // a seguir, captura de dados do objeto para o statement
-            stmt.setInt(1, ep.getId());
+            stmt.setInt(1, ep.getNumeroEp());
             stmt.setString(2, ep.getTitulo());
             stmt.setString(3, ep.getDuracao());
             stmt.setInt(4, ep.getFktemp().getId());    
@@ -109,7 +110,7 @@ public class EpisodioDAO {
         try {
             
             stmt = con.prepareStatement(
-                    "DELETE FROM episodio WHERE id = ?");
+                    "DELETE FROM episodio WHERE pk_id_ep = ?");
             stmt.setInt(1, ep.getId());          
 
             stmt.executeUpdate();
