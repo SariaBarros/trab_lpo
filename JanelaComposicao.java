@@ -110,9 +110,8 @@ public class JanelaComposicao {
     }
 
     private void configurarBotaoTemporada() {
-        botaoTemporada = new BotaoMenu("Temporada", 4);
+        botaoTemporada = new BotaoMenu("Temporada", 3);
         botaoTemporada.adicionarMenuItem("Cadastrar");
-        botaoTemporada.adicionarMenuItem("Listar");
         botaoTemporada.adicionarMenuItem("Atualizar");
         botaoTemporada.adicionarMenuItem("Deletar");
 
@@ -135,18 +134,12 @@ public class JanelaComposicao {
         });
 
         botaoTemporada.configurarEventoBotaoMenuItem(1, (informacoesDoEvento) -> {
-            barraDeStatus.setText("Cliquei em listar Temporada");
-            // codigo de listar temporada
-
-        });
-
-        botaoTemporada.configurarEventoBotaoMenuItem(2, (informacoesDoEvento) -> {
             barraDeStatus.setText("Cliquei em atualizar Temporada");
             // codigo de atualizar temporada
 
         });
 
-        botaoTemporada.configurarEventoBotaoMenuItem(3, (informacoesDoEvento) -> {
+        botaoTemporada.configurarEventoBotaoMenuItem(2, (informacoesDoEvento) -> {
             barraDeStatus.setText("Cliquei em deletar Temporada");
             // codigo de deletar temporada
 
@@ -154,9 +147,8 @@ public class JanelaComposicao {
     }
 
     private void configurarBotaoEpisodio() {
-        botaoEpisodio = new BotaoMenu("Episodio", 4);
+        botaoEpisodio = new BotaoMenu("Episodio", 3);
         botaoEpisodio.adicionarMenuItem("Cadastrar");
-        botaoEpisodio.adicionarMenuItem("Listar");
         botaoEpisodio.adicionarMenuItem("Atualizar");
         botaoEpisodio.adicionarMenuItem("Deletar");
 
@@ -180,18 +172,12 @@ public class JanelaComposicao {
         });
 
         botaoEpisodio.configurarEventoBotaoMenuItem(1, (informacoesDoEvento) -> {
-            barraDeStatus.setText("Cliquei em listar Episodio");
-            // codigo de listar Episodio
-
-        });
-
-        botaoEpisodio.configurarEventoBotaoMenuItem(2, (informacoesDoEvento) -> {
             barraDeStatus.setText("Cliquei em atualizar Episodio");
             // codigo de atualizar Episodio
 
         });
 
-        botaoEpisodio.configurarEventoBotaoMenuItem(3, (informacoesDoEvento) -> {
+        botaoEpisodio.configurarEventoBotaoMenuItem(2, (informacoesDoEvento) -> {
             barraDeStatus.setText("Cliquei em deletar Episodio");
             // codigo de deletar Episodio
 
