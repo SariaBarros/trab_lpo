@@ -1,12 +1,22 @@
 public abstract class Animacao {
     final int TAM_INICIAL = 50;
+    
     private int id;
     private String nome;
     private String classificacaoIndicativa;
     private String estudio;
     private String genero;
     private int capacidade = TAM_INICIAL;
+    
+    //construtor para o  CREATE - sem id
+    public Animacao(String nome, String classificacaoIndicativa, String estudio, String genero) {
+        setNome(nome);
+        setClassificacaoIndicativa(classificacaoIndicativa);
+        setEstudio(estudio);
+        setGenero(genero);
+    }
 
+    //construtor padrão
     public Animacao(int id, String nome, String classificacaoIndicativa, String estudio, String genero) {
         setId(id);
         setNome(nome);
