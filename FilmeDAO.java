@@ -24,15 +24,14 @@ public class FilmeDAO implements OperacoesCRUD{
             // formação de statements a partir do objeto passado como parâmetro, para
             // executar o sql
             stmt = con.prepareStatement(
-                    "INSERT INTO filme (pk_id_filme,nome_filme,classificacaoIndicativa,estudio,genero,ano,duracao)VALUES(?,?,?,?,?,?,?)");
+                    "INSERT INTO filme (nome_filme,classificacaoIndicativa,estudio,genero,ano,duracao)VALUES(?,?,?,?,?,?)");
             // a seguir, captura de dados do objeto para o statement
-            stmt.setInt(1, f.getId());
-            stmt.setString(2, f.getNome());
-            stmt.setString(3, f.getClassificacaoIndicativa());
-            stmt.setString(4, f.getEstudio());
-            stmt.setString(5, f.getGenero());
-            stmt.setInt(6, f.getAno());
-            stmt.setString(7, f.getDuracao());
+            stmt.setString(1, f.getNome());
+            stmt.setString(2, f.getClassificacaoIndicativa());
+            stmt.setString(3, f.getEstudio());
+            stmt.setString(4, f.getGenero());
+            stmt.setInt(5, f.getAno());
+            stmt.setString(6, f.getDuracao());
 
             stmt.executeUpdate(); // executa a inserção
             JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
@@ -95,15 +94,15 @@ public class FilmeDAO implements OperacoesCRUD{
 
         try {
             stmt = con.prepareStatement(
-                    "UPDATE filme SET pk_id_filme = ?, nome_filme = ?, classificacaoIndicativa = ?, estudio = ?, genero = ?, ano = ?, duracao = ? WHERE id = ?");
-            stmt.setInt(1, f.getId());
-            stmt.setString(2, f.getNome());
-            stmt.setString(3, f.getClassificacaoIndicativa());
-            stmt.setString(4, f.getEstudio());
-            stmt.setString(5, f.getGenero());
-            stmt.setInt(6, f.getAno());
-            stmt.setString(7, f.getDuracao());
-            stmt.setInt(8, f.getId()); //identificador do WHERE pra saber qual o filme a ser atualizado
+                    "UPDATE filme SET nome_filme = ?, classificacaoIndicativa = ?, estudio = ?, genero = ?, ano = ?, duracao = ? WHERE pk_id_filme = ?");
+            
+            stmt.setString(1, f.getNome());
+            stmt.setString(2, f.getClassificacaoIndicativa());
+            stmt.setString(3, f.getEstudio());
+            stmt.setString(4, f.getGenero());
+            stmt.setInt(5, f.getAno());
+            stmt.setString(6, f.getDuracao());
+            stmt.setInt(7, f.getId()); //identificador do WHERE pra saber qual o filme a ser atualizado
 
             stmt.executeUpdate();
             JOptionPane.showMessageDialog(null, "Atualizado com sucesso!");
@@ -123,9 +122,8 @@ public class FilmeDAO implements OperacoesCRUD{
         Filme f = (Filme) filme;
 
         try {
-            stmt = con.prepareStatement(
-                    "DELETE FROM filme WHERE id = ?");
-            stmt.setInt(1, f.getId()); //identificador do WHERE pra saber qual o filme a ser atualizado
+            stmt = con.prepareStatement("DELETE FROM filme WHERE pk_id_filme = ?");
+            stmt.setInt(1, f.getId()); //identificador do WHERE pra saber qual o filme a ser deletado
 
             stmt.executeUpdate();
             JOptionPane.showMessageDialog(null, "Excluído com sucesso!");
