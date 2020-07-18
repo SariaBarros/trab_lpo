@@ -54,8 +54,9 @@ public class JanelaComposicao {
             public void windowClosing(java.awt.event.WindowEvent windowEvent) {
                 int escolha = JOptionPane.showConfirmDialog(janela, 
                 "Voce realmente quer sair do programa?", "Sair do Programa?", 
-                JOptionPane.YES_NO_OPTION,
-                JOptionPane.QUESTION_MESSAGE);
+                JOptionPane.YES_NO_OPTION,  //botao sim e nao
+                JOptionPane.QUESTION_MESSAGE); //icone
+                
                 if (escolha == JOptionPane.YES_OPTION){
                     System.exit(0);
                 }
