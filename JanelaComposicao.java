@@ -134,10 +134,15 @@ public class JanelaComposicao {
         botaoAnime.configurarEventoBotaoMenuItem(3, (informacoesDoEvento) -> {
             barraDeStatus.setText("Cliquei em deletar Anime");
             // codigo de deletar anime
-            int id = Leitor2.leInteiroDoTeclado("Informe o id do Anime que será deletado: ");
-            Anime anime = new Anime(id, null, null, null, null);
-            AnimeDAO aDao = new AnimeDAO();
-            aDao.delete(anime);
+            try {
+                int id = Leitor2.leInteiroDoTeclado("Informe o id do Anime que será deletado: ");
+                Anime anime = new Anime(id, null, null, null, null);
+                AnimeDAO aDao = new AnimeDAO();
+                aDao.delete(anime);
+            }
+            catch( NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Insira numero!");
+            } 
         });
     }
 
@@ -184,10 +189,14 @@ public class JanelaComposicao {
         botaoTemporada.configurarEventoBotaoMenuItem(2, (informacoesDoEvento) -> {
             barraDeStatus.setText("Cliquei em deletar Temporada");
             // codigo de deletar temporada
-            int id = Leitor2.leInteiroDoTeclado("Informe o id da Temporada que será deletada: ");
-            Temporada temp = new Temporada(id, 0, null, null, null);
-            TemporadaDAO tempDAO = new TemporadaDAO();
-            tempDAO.DELETE(temp);
+            try {
+                int id = Leitor2.leInteiroDoTeclado("Informe o id da Temporada que será deletada: ");
+                Temporada temp = new Temporada(id, 0, null, null, null);
+                TemporadaDAO tempDAO = new TemporadaDAO();
+                tempDAO.DELETE(temp);    
+            } catch ( NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Insira numero!");
+            }
         });
     }
 
@@ -233,10 +242,14 @@ public class JanelaComposicao {
         botaoEpisodio.configurarEventoBotaoMenuItem(2, (informacoesDoEvento) -> {
             barraDeStatus.setText("Cliquei em deletar Episodio");
             // codigo de deletar Episodio
-            int id = Leitor2.leInteiroDoTeclado("Informe o id do Episodio que será deletado: ");
-            Episodio episodio = new Episodio(id, 0, null, null);
-            EpisodioDAO epDAO = new EpisodioDAO();
-            epDAO.DELETE(episodio);
+            try {
+                int id = Leitor2.leInteiroDoTeclado("Informe o id do Episodio que será deletado: ");
+                Episodio episodio = new Episodio(id, 0, null, null);
+                EpisodioDAO epDAO = new EpisodioDAO();
+                epDAO.DELETE(episodio);            
+            } catch ( NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Insira numero!");
+            }
 
         });
     }
@@ -294,10 +307,14 @@ public class JanelaComposicao {
         botaoFilme.configurarEventoBotaoMenuItem(3, (informacoesDoEvento) -> {
             barraDeStatus.setText("Cliquei em deletar Filme");
             // codigo de deletar filme
-            int id = Leitor2.leInteiroDoTeclado("Informe o id do Filme que será deletado: ");
-            Filme filme = new Filme(id, null, null, null, null, 0, null);
-            FilmeDAO filmeDAO = new FilmeDAO();
-            filmeDAO.delete(filme);
+            try {
+                int id = Leitor2.leInteiroDoTeclado("Informe o id do Filme que será deletado: ");
+                Filme filme = new Filme(id, null, null, null, null, 0, null);
+                FilmeDAO filmeDAO = new FilmeDAO();
+                filmeDAO.delete(filme);
+            } catch ( NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Insira numero!");
+            } 
         });
     }
 }
