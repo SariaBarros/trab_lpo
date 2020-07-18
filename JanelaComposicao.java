@@ -28,12 +28,13 @@ public class JanelaComposicao {
         configurarBotaoTemporada();
         configurarBotaoEpisodio();
         configurarBotaoFilme();
+        fecharPrograma();
 
         barraDeMenu.add(botaoAnime.getMenu());
         barraDeMenu.add(botaoTemporada.getMenu());
         barraDeMenu.add(botaoEpisodio.getMenu());
         barraDeMenu.add(botaoFilme.getMenu());
-
+        
         barraDeStatus = new JLabel("Barra de Status");
         painel = new JPanel(new GridLayout(300, 1));
 
@@ -43,6 +44,23 @@ public class JanelaComposicao {
         janela.setJMenuBar(barraDeMenu);
         janela.setSize(800, 600);
         janela.setVisible(true);
+    }
+
+    private void fecharPrograma() {
+        janela.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+
+        janela.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                int escolha = JOptionPane.showConfirmDialog(janela, 
+                "Voce realmente quer sair do programa?", "Sair do Programa?", 
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE);
+                if (escolha == JOptionPane.YES_OPTION){
+                    System.exit(0);
+                }
+            }
+        });
     }
 
     private void configurarBotaoAnime() {
